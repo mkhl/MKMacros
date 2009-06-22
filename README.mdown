@@ -1,0 +1,4 @@
+# MKMacros
+
+Some Macros I use. Mostly stolen and adapted from and attributed to their
+respective sources.

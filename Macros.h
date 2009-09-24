@@ -6,6 +6,14 @@
 #define DebugLog(format, ...)   // stubbed out
 #endif
 
+// A friendly logging function.
+static inline void NiceLog(NSDate *since)
+{
+    NSTimeInterval timeElapsed = fabs([since timeIntervalSinceNow]);
+    NSLog(@"Dear Diary, today I called %s, and we talked for %f seconds!",
+          __PRETTY_FUNCTION__, timeElapsed);
+}
+
 // A quick check if an object is empty.
 // Source: http://www.wilshipley.com/blog/2005/10/pimp-my-code-interlude-free-code.html
 static inline BOOL isEmpty(id thing)

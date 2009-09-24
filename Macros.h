@@ -31,7 +31,7 @@ static inline BOOL isEmpty(id thing)
 
 // Use Unions (instead of type-punning) to recast Structs.
 // Source: http://cocoawithlove.com/2008/04/using-pointers-to-recast-in-c-is-bad.html
-// #define UNION_CAST(x, destType) (((union {__typeof__(x) a; destType b;})x).b)
+#define UNION_CAST(x, destType) (((union {__typeof__(x) a; destType b;})x).b)
 
 
 // Automatically release objects when they leave their scope.

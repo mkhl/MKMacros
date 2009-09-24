@@ -38,6 +38,7 @@ static inline BOOL isEmpty(id thing)
 static inline void releaseObject(id *thing)
 {
     [*thing release];
+    *thing = nil;
 }
 
 

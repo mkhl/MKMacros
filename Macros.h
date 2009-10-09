@@ -1,7 +1,7 @@
 // A better logging function.
 #if DEBUG
 // Source: http://blog.mbcharbonneau.com/post/56581688/better-logging-in-objective-c
-#define DebugLog(format, ...) NSLog(@"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(format), ## __VA_ARGS__])
+#define DebugLog(format, ...)   NSLog(@"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(format), ## __VA_ARGS__])
 #else
 #define DebugLog(format, ...)   // stubbed out
 #endif
@@ -61,6 +61,16 @@ static inline void releaseObject(id *thing)
 // Release an ivar and set it to nil.
 // Source: http://zathras.de/angelweb/blog-defensive-coding-in-objective-c.htm
 #define DESTROY(thing)  do { [thing release]; thing = nil; } while (0)
+
+
+// "Checked" property names.
+// Source: http://www.zathras.de/angelweb/blog-safe-key-value-coding.htm
+// Use with '-Wundeclared-selector' enabled.
+#if DEBUG
+#define PROPERTY(propName)  NSStringFromSelector(@selector(propName))
+#else
+#define PROPERTY(propName)  @#propName
+#endif
 
 
 // KVO contexts for Proper Key-Value Observer Usage.

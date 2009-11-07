@@ -1,10 +1,11 @@
 // A better logging function.
-#if DEBUG
 // Source: http://blog.mbcharbonneau.com/post/56581688/better-logging-in-objective-c
+#if DEBUG
 #define DebugLog(format, ...)   NSLog(@"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(format), ## __VA_ARGS__])
 #else
 #define DebugLog(format, ...)   // stubbed out
 #endif
+
 
 // A friendly logging function.
 static inline void NiceLog(NSDate *since)
@@ -13,6 +14,7 @@ static inline void NiceLog(NSDate *since)
     NSLog(@"Dear Diary, today I called %s, and we talked for %f seconds!",
           __PRETTY_FUNCTION__, timeElapsed);
 }
+
 
 // A quick check if an object is empty.
 // Source: http://www.wilshipley.com/blog/2005/10/pimp-my-code-interlude-free-code.html
@@ -28,10 +30,10 @@ static inline BOOL isEmpty(id thing)
 
 // Helpful macros for object creation.
 // Source: http://cbarrett.tumblr.com/post/53371495/some-helpful-macros-for-object-creation
-#define NSARRAY(...) [NSArray arrayWithObjects: __VA_ARGS__, nil]
-#define NSDICT(...) [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
-#define NSSET(...) [NSSet setWithObjects: __VA_ARGS__, nil]
-#define NSBOOL(thing) ((thing) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse)
+#define NSARRAY(...)    [NSArray arrayWithObjects: __VA_ARGS__, nil]
+#define NSDICT(...)     [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
+#define NSSET(...)      [NSSet setWithObjects: __VA_ARGS__, nil]
+#define NSBOOL(thing)   ((thing) ? (id)kCFBooleanTrue : (id)kCFBooleanFalse)
 
 
 // Use Unions (instead of type-punning) to recast Structs.
@@ -60,26 +62,26 @@ static inline void releaseObject(id *thing)
 
 // Release an ivar and set it to nil.
 // Source: http://zathras.de/angelweb/blog-defensive-coding-in-objective-c.htm
-#define DESTROY(thing)  do { [thing release]; thing = nil; } while (0)
+#define DESTROY(thing)          do { [thing release]; thing = nil; } while (0)
 
 
 // "Checked" property names.
 // Source: http://www.zathras.de/angelweb/blog-safe-key-value-coding.htm
 // Use with '-Wundeclared-selector' enabled.
 #if DEBUG
-#define PROPERTY(propName)  NSStringFromSelector(@selector(propName))
+#define PROPERTY(propName)      NSStringFromSelector(@selector(propName))
 #else
-#define PROPERTY(propName)  @#propName
+#define PROPERTY(propName)      @#propName
 #endif
 
 
 // KVO contexts for Proper Key-Value Observer Usage.
 // Source: http://www.dribin.org/dave/blog/archives/2008/09/24/proper_kvo_usage/
-#define KVO_Context(thing) static NSString *const thing = @#thing
+#define KVO_Context(thing)      static NSString *const thing = @#thing
 
 
 // Container iteration macro.
 // Source: http://sigpipe.macromates.com/2004/09/13/iterating-an-array/
 #ifndef forall
-#define forall(container, var) for (id var, _enumerator = [container objectEnumerator]; var = [_enumerator nextObject];)
+#define forall(container, var)  for (id var, _enumerator = [container objectEnumerator]; var = [_enumerator nextObject];)
 #endif

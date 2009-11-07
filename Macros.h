@@ -75,6 +75,11 @@ static inline void releaseObject(id *thing)
 #endif
 
 
+// String Constants
+// Inspiration: http://www.zathras.de/angelweb/blog-helpful-xcode-user-scripts.htm
+#define CONSTANT(thing)         NSString *const thing = @#thing
+
+
 // KVO contexts for Proper Key-Value Observer Usage.
 // Source: http://www.dribin.org/dave/blog/archives/2008/09/24/proper_kvo_usage/
 #define KVO_Context(thing)      static NSString *const thing = @#thing
